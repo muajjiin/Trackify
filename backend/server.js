@@ -26,10 +26,6 @@ async function initDB() {
   }
 }
 
-app.get("/", (req, res) => {
-  res.send("its working");
-});
-
 app.get("/api/transactions/:userid", async (req, res) => {
   try {
     const { user_id } = req.params;
@@ -71,6 +67,9 @@ RETURNING *
 app.delete("/api/transactions/:id", async (req, res) => {
   try {
     const { id } = req.params;
+    if (isNaN(parseInt(id))) {
+      return res.status(400).json({ message: "Invalid transaction" });
+    }
     const result = await sql`
 DELETE FROM transactions WHERE  id = ${id} RETURNING *
 `;
@@ -82,6 +81,39 @@ DELETE FROM transactions WHERE  id = ${id} RETURNING *
     console.log("Error creating the transaciton", error);
     res.status(500).json({ message: "Internal server Error" });
   }
+});
+
+app.get("/api/transactions/summary/:userId", async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    // Query 1: Balance (Correct)
+    const balanceResult = await sql`
+            SELECT COALESCE(SUM(amount), 0) as balance FROM transactions WHERE user_id = ${userId}
+        `;
+
+    // Query 2: Income (Correct)
+    const incomeResult = await sql`
+            SELECT COALESCE(SUM(amount), 0) as income FROM transactions
+            WHERE user_id = ${userId} AND amount > 0
+        `;
+
+    // Query 3: Expense (TYPO FIX: Changed 'amout' to 'amount')
+    const expenseResult = await sql`
+            SELECT COALESCE(SUM(amount), 0) as expense FROM transactions
+            WHERE user_id = ${userId} AND amount < 0
+        `;
+
+    // Send a successful response
+    res.status(200).json({
+      balance: balanceResult[0].balance,
+      income: incomeResult[0].income,
+      expense: expenseResult[0].expense,
+    });
+  } catch (error) {
+    console.log("Error getting the summary", error);
+    res.status(500).json({ message: "Internal server Error" });
+  } // <--- SYNTAX FIX: This is the missing closing parenthesis for app.get(...)
 });
 
 console.log("my port:", process.env.PORT);
