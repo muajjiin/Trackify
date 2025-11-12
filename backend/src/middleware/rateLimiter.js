@@ -6,7 +6,7 @@ const rateLimiter = async (req, res, next) => {
 
     if (!success) {
       return res.status(429).json({
-        message: "To many requests , pleser try again later",
+        message: "Too many requests, please try again later.",
       });
     }
 
