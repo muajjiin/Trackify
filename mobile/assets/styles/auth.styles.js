@@ -1,14 +1,14 @@
+// styles/auth.styles.js
 import { StyleSheet } from "react-native";
-import { COLORS } from "../../constants/colors.js";
+import { COLORS } from "../../constants/colors";
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.background,
-    padding: 200,
+    padding: 20,
     justifyContent: "center",
   },
-
   illustration: {
     height: 310,
     width: 300,
@@ -31,8 +31,7 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     color: COLORS.text,
   },
-
-  erorInput: {
+  errorInput: {
     borderColor: COLORS.expense,
   },
   button: {
@@ -54,7 +53,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     gap: 8,
   },
-  fotterText: {
+  footerText: {
     color: COLORS.text,
     fontSize: 16,
   },
@@ -65,7 +64,7 @@ export const styles = StyleSheet.create({
   },
   verificationContainer: {
     flex: 1,
-    backgroundColor: COLORS.primary,
+    backgroundColor: COLORS.background,
     padding: 20,
     justifyContent: "center",
     alignItems: "center",
@@ -82,10 +81,16 @@ export const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 15,
     marginBottom: 16,
-    flexDirection: "row",
-    alignItems: "center",
+    borderWidth: 1,
+    borderColor: COLORS.border,
+    fontSize: 16,
+    color: COLORS.text,
     width: "100%",
+    textAlign: "center",
+    letterSpacing: 2,
   },
+
+  // 🔴 Error styles
   errorBox: {
     backgroundColor: "#FFE5E5",
     padding: 12,
@@ -97,7 +102,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
   },
-  errotText: {
+  errorText: {
     color: COLORS.text,
     marginLeft: 8,
     flex: 1,
