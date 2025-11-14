@@ -9,11 +9,14 @@ export const styles = StyleSheet.create({
     padding: 20,
     justifyContent: "center",
   },
+
   illustration: {
     height: 310,
     width: 300,
-    resizeMode: "contain",
+    resizeMode: "cover",
+    alignSelf: "center",
   },
+
   title: {
     fontSize: 32,
     fontWeight: "bold",
