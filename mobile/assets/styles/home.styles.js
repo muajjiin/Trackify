@@ -249,7 +249,7 @@ export const styles = StyleSheet.create({
   },
   transactionsHeaderContainer: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
     marginBottom: 10,
     paddingBottom: 5,
