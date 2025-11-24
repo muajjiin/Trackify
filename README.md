@@ -61,7 +61,7 @@ graph TB
     Clerk["🔐 Clerk Auth"]
     Backend["🖥️ Express.js Backend"]
     Redis["⚡ Upstash Redis<br/>Rate Limiting"]
-    Database["🗄️ Neon PostgreSQL"]
+    Database["🗄️ Atlas Mongodb"]
     
     User -->|Authenticates| Clerk
     Clerk -->|Token| Mobile
@@ -175,7 +175,7 @@ sequenceDiagram
     participant User
     participant Mobile as Mobile App
     participant Backend as Express API
-    participant DB as PostgreSQL
+    participant DB as MongoDB
     
     User->>Mobile: Add Transaction
     Mobile->>Backend: POST /api/transactions
@@ -323,4 +323,4 @@ For issues, questions, or suggestions, please open an issue on GitHub or contact
 
 ---
 
-**Built with ❤️ by the Trackify team**
+**Built with ❤️ by Me**
